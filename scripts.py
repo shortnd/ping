@@ -34,8 +34,8 @@ with open('urls.txt', 'r') as f:
       response = socket.gethostbyname(no_backslash)
 
       if '69.64.88.239' in response:
-        print(f'DNS not Changed - {no_backslash}')
-        not_changed_file.write(f'DNS not Changed - {no_backslash}\n')
+          print(f'DNS not Changed - {no_backslash}')
+          not_changed_file.write(f'DNS not Changed - {no_backslash}\n')
       elif '50.28.0.27' in response:
           print(f'On new server')
           changed_file.write(f'On new server - {no_backslash}\n')
