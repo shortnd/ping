@@ -1,7 +1,7 @@
 import os
 import socket
-from bs4 import BeautifulSoup
 from urllib.request import urlopen
+from bs4 import BeautifulSoup
 
 changed_file = open('changed.txt', 'w')
 not_changed_file = open('not_changed.txt', 'w')
@@ -39,17 +39,19 @@ with open('urls.txt', 'r') as f:
           print(f'DNS not Changed - {no_backslash}')
           not_changed_file.write(f'DNS not Changed - {no_backslash}\n')
       elif '50.28.0.27' in response:
-          try:
-            soup = BeautifulSoup(urlopen(f))
-            print(soup.title.string)
-          except:
-            print('error')
-          # if 'IIS' not in soup.title.string:
-          #   print(f'{no_backslash} is Down')
-          #   changed_file.write(f'On new server but down - {no_backslash}')
+          soup = BeautifulSoup(urlopen('http://'+no_http).read(), features="lxml")
+          # print(soup.title.string)
+          if 'IIS' in soup.title.string:
+            print(f'{no_backslash} is Down')
+            changed_file.write(f'On new server but down - {no_backslash}')
           # else:
-          #   print(f'On new server')
-          #   changed_file.write(f'On new server - {no_backslash}\n')
+          print(f'On new server')
+          # try:
+          #   soup = BeautifulSoup(urlopen(hostname).read(), features='xlms')
+          #   print(soup.title.string)
+          # except:
+          #   print('error')
+          changed_file.write(f'On new server - {no_backslash}\n')
       else:
           print('on other server')
           error_or_other_server.write(f'On different server - {no_backslash}\n')
