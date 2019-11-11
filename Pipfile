@@ -10,6 +10,7 @@ autopep8 = "*"
 openpyxl = "*"
 beautifulsoup4 = "*"
 python-dotenv = "*"
+progress = "*"
 
 [requires]
 python_version = "3.7"
