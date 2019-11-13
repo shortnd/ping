@@ -1,7 +1,7 @@
 import os
 import socket
 import time
-from progress.bar import Bar
+from progress.bar import ChargingBar
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 
@@ -14,7 +14,8 @@ old_server_1 = '161.47.104.26'
 old_server_2 = '161.47.104.27'
 
 count = len(open('urls.txt').readlines())
-with Bar('', max=count) as bar:
+print(f'{count} Sites being checked')
+with ChargingBar('', max=count) as bar:
     with open('urls.txt', 'r') as f:
         for line in f:
             hostname = line.strip()
@@ -32,7 +33,7 @@ with Bar('', max=count) as bar:
 
             try:
                 response = socket.gethostbyname(no_backslash)
-                # time.sleep(.30)
+                time.sleep(.30)
                 if old_server_1 in response:
                     # print(f'{old_server_1} - {no_backslash}')
                     not_changed_file.write(f'DNS not Changed - {no_backslash} - {old_server_1}\n')
